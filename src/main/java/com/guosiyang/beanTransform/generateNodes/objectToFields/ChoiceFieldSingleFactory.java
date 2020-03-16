@@ -14,7 +14,7 @@ public class ChoiceFieldSingleFactory extends AbStractSingleFactory<ChoiceFields
     private ChoiceFieldSingleFactory() {
     }
 
-     static AbStractSingleFactory<ChoiceFieldsAble> getInstance() {
+    public static AbStractSingleFactory<ChoiceFieldsAble> getInstance() {
         if (singleFactory == null) {
             synchronized (ChoiceFieldSingleFactory.class) {
                 singleFactory = new ChoiceFieldSingleFactory();
@@ -26,7 +26,7 @@ public class ChoiceFieldSingleFactory extends AbStractSingleFactory<ChoiceFields
 
     @Override
     protected boolean init() {
-        stringToT.put("NULL",new NullChoiceField());
+        stringToT.put("NULL", new NullChoiceField());
         logger.info("添加ChoiceFieldAble的null策略成功");
         return true;
     }

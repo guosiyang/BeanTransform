@@ -57,11 +57,11 @@ public interface IsTransformNode {
 
     /**
      * @Param
-     * @description 每一个节点对象都应该有一个得到唯一标识符的方法 说白了怎么证明 该节点是唯一节点
+     * @description 每一个节点对象都应该有一个得到唯一标识符的方法 说白了怎么证明 该节点是所有解析的节点里面的唯一节点
      * @author 郭思洋
      * @date 2020/2/23 22:44
      * @return
      */
-    public String getOnlySign();
+    public String getOnlySignPath();
 
 }

@@ -1,5 +1,6 @@
 package com.guosiyang.beanTransform.generateNodes.transformNodes;
 
+import com.guosiyang.beanTransform.util.ParentToSonStruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,12 +39,13 @@ public class RootTransformNode extends ObjectTransformNode {
         return;
     }
 
-    public void setParentNode(ObjectTransformNode parentNode) {
+    @Override
+    public void setParentNode(ParentToSonStruct parentNode) {
         return;
     }
 
     @Override
-    public ObjectTransformNode getParentNode() {
+    public ParentToSonStruct getParentNode() {
         return null;
     }
 }

@@ -1,8 +1,14 @@
 package com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode;
 
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.CommonGetMethodName;
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.CommonSetMethodName;
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.GetMethodNameAble;
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.SetMethodNameAble;
+import com.guosiyang.beanTransform.generateNodes.transformNodes.ObjectTransNodeBuilder;
 import com.guosiyang.beanTransform.generateNodes.transformNodes.ObjectTransformNode;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * @ClassName : AbstractFieldsToNode
@@ -18,6 +24,14 @@ public abstract class AbstractFieldsToNodeHandler {
 
     //下一个责任链
     protected AbstractFieldsToNodeHandler nextHandler;
+
+    //生成的get方法的名称
+    private GetMethodNameAble getMethodNameAble = new CommonGetMethodName();
+
+    //生成的set方法名称
+    private SetMethodNameAble setMethodNameAble = new CommonSetMethodName();
+
+
     /**
     * @Param
     * @description 处理方法 表示传入的字段 是否能进行处理
@@ -34,5 +48,70 @@ public abstract class AbstractFieldsToNodeHandler {
 
     public void setNextHandler(AbstractFieldsToNodeHandler nextHandler) {
         this.nextHandler = nextHandler;
+    }
+
+    /**
+    * @Param
+    * @description TODO
+    * @author 郭思洋
+    * @date 2020/3/16 1:56
+    * @return  通用设计 所有节点都会走的设置方法
+    */
+    public ObjectTransNodeBuilder commonDeal (ObjectTransNodeBuilder o,Field nowField, ObjectTransformNode parrentTransfromNode){
+        try {
+            o.setConstructor(nowField.getType().getConstructor(null)).setNowField(nowField);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return o;
+    }
+
+    /**
+    * @Param
+    * @description TODO
+    * @author 郭思洋
+    * @date 2020/3/16 2:00
+    * @return 无论什么方法都会走的getMethod 故放在了抽象类里面
+    */
+    public Method getGetMethod(Field nowField, ObjectTransformNode parrentTransfromNode){
+        try {
+            return parrentTransfromNode.getConstructor().getDeclaringClass().getMethod(getMethodNameAble.getMethodNameByClass(nowField),null);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * @Param
+     * @description TODO
+     * @author 郭思洋
+     * @date 2020/3/16 2:00
+     * @return 无论什么方法都会走的getMethod 故放在了抽象类里面
+     */
+    public Method getSetMethod(Field nowField, ObjectTransformNode parrentTransfromNode){
+        try {
+            return parrentTransfromNode.getConstructor().getDeclaringClass().getMethod(setMethodNameAble.setMethodNameByClass(nowField),setMethodNameAble.setMethodParamters(nowField));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public GetMethodNameAble getGetMethodNameAble() {
+        return getMethodNameAble;
+    }
+
+    public void setGetMethodNameAble(GetMethodNameAble getMethodNameAble) {
+        this.getMethodNameAble = getMethodNameAble;
+    }
+
+    public SetMethodNameAble getSetMethodNameAble() {
+        return setMethodNameAble;
+    }
+
+    public void setSetMethodNameAble(SetMethodNameAble setMethodNameAble) {
+        this.setMethodNameAble = setMethodNameAble;
     }
 }

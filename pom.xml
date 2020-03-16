@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>BeanTransform</artifactId>
+    <artifactId> BeanTransform</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -52,5 +52,4 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
-
 </project>

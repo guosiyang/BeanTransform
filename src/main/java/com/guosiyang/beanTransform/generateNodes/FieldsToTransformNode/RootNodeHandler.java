@@ -1,6 +1,9 @@
 package com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode;
 
+import com.guosiyang.beanTransform.generateNodes.transformNodes.ObjectTransNodeBuilder;
 import com.guosiyang.beanTransform.generateNodes.transformNodes.ObjectTransformNode;
+import com.guosiyang.beanTransform.generateNodes.transformNodes.RootTransformNode;
+import javafx.beans.property.ReadOnlyObjectProperty;
 
 import java.lang.reflect.Field;
 
@@ -14,6 +17,14 @@ import java.lang.reflect.Field;
 public class RootNodeHandler extends AbstractFieldsToNodeHandler {
     @Override
     public ObjectTransformNode deal(Field nowField, ObjectTransformNode parrentTransfromNode) {
-        return null;
+        if (parrentTransfromNode == null){
+            ObjectTransNodeBuilder o =new ObjectTransNodeBuilder(ObjectTransNodeBuilder.TransNodeType.ROOT);
+            commonDeal(o,nowField,parrentTransfromNode);
+            return o.setPolicyWay(nowField.getType().getSimpleName()).getResult();
+        }
+        if (nextHandler == null){
+            return null;
+        }
+        return nextHandler.deal(nowField,parrentTransfromNode);
     }
 }

@@ -1,5 +1,7 @@
 package com.guosiyang.beanTransform.generateNodes.transformNodes;
 
+import com.guosiyang.beanTransform.util.ParentToSonStruct;
+
 import java.util.HashSet;
 
 /**
@@ -13,12 +15,12 @@ import java.util.HashSet;
 public class FianlTransformNode extends ObjectTransformNode {
 
     @Override
-    public void addSonNodes(ObjectTransformNode sonNodes) {
+    public void addSonNodes(ParentToSonStruct sonNodes) {
         return;
     }
 
     @Override
-    public HashSet<ObjectTransformNode> getSonNodes() {
+    public HashSet<ParentToSonStruct> getSonNodes() {
         return null;
     }
 }
