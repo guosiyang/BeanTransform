@@ -56,7 +56,7 @@ public abstract class AbStractSingleFactory<T> {
             logger.info("传入的type : " + type + "已存在");
             return false;
         }
-        if (LambdaUtil.isLambdaClass(type)){
+        if (LambdaUtil.isLambdaClassBySimpleName(type)){
             return false;
         }
         stringToT.put(type, t);

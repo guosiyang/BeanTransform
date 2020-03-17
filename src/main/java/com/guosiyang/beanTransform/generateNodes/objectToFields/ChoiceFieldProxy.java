@@ -26,7 +26,7 @@ public class ChoiceFieldProxy {
     * @return
     */
     public String addChioceFieldAbleCache(ChoiceFieldsAble choiceFieldsAble){
-        if (LambdaUtil.isLambdaClass(choiceFieldsAble.getClass().getSimpleName())){
+        if (LambdaUtil.isLambdaClassBySimpleName(choiceFieldsAble.getClass().getSimpleName())){
             return null;
         }
         Class<? extends ChoiceFieldsAble> choiceClass = choiceFieldsAble.getClass();

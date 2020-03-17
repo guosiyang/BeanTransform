@@ -20,10 +20,39 @@ public class LambdaUtil {
     * @date 2020/2/25 15:07
     * @return
     */
-    public static boolean isLambdaClass(String className){
+    public static boolean isLambdaClassBySimpleName(String className){
         if (className == null || "".equals(className)){
             return false;
         }
         return matchLambda.matcher(className).matches();
     }
+
+    /**
+    * @Param
+    * @description 通过class检验 一样的
+    * @author 郭思洋
+    * @date 2020/3/17 2:20
+    * @return
+    */
+    public static boolean isLambdaClassByClass(Class c){
+        if (c == null){
+            return false;
+        }
+        return isLambdaClassBySimpleName(c.getSimpleName());
+    }
+
+    /**
+     * @Param
+     * @description 通过object检验 一样的
+     * @author 郭思洋
+     * @date 2020/3/17 2:20
+     * @return
+     */
+    public static boolean isLambdaClassByObj(Object o){
+        if (o == null){
+            return false;
+        }
+        return isLambdaClassByClass(o.getClass());
+    }
+
 }

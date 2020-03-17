@@ -45,4 +45,5 @@ public class CommonSetMethodName implements SetMethodNameAble {
         return type;
     }
 
+
 }

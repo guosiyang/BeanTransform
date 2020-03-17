@@ -20,5 +20,4 @@ public interface GetMethodNameAble {
      * 比如 对于集合节点 他的get方法就是getxxx 但是对于set来讲 我们得是addxxx (通常)
     */
     public String getMethodNameByClass(Field field);
-
 }
