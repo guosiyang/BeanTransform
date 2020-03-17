@@ -1,9 +1,7 @@
 package com.guosiyang.beanTransform.generateNodes.objectToFields;
 
-import com.guosiyang.beanTransform.util.AbStractSingleFactory;
+import com.guosiyang.beanTransform.util.CacheTSingleContainer;
 import com.guosiyang.beanTransform.util.LambdaUtil;
-
-import java.util.regex.Pattern;
 
 /**
  * @ClassName : 该类主要提为访问单例工厂提供代理类
@@ -14,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class ChoiceFieldProxy {
 
-    private static final AbStractSingleFactory<ChoiceFieldsAble> SINGLE_FACTORY = ChoiceFieldSingleFactory.getInstance();
+    private static final CacheTSingleContainer<ChoiceFieldsAble> SINGLE_FACTORY = ChoiceFieldSingleContainer.getInstance();
 
     /**
     * @Param

@@ -1,11 +1,9 @@
 
 package com.guosiyang.beanTransform.util;
 
-import com.guosiyang.beanTransform.generateNodes.transformNodes.RootTransformNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -13,20 +11,20 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description : TODO
  * @Author : 郭思洋
  * @Date: 2020-02-24 23:53
- * @Think:设计该类思路 像我目前写的东西 经常碰到策略仅仅注重的处理过程 并不需要关注对象本身
- * 故其实策略应该是单例的 但我们不能把每个策略都写成单例 因为策略本身仅仅关注处理过程
- * 故我们应该针对同一种类型策略设计一个单例工厂 对于此策略我们仅仅通过单例工厂的代理类来进行访问
+ * @Think:设计该类思路 为缓存T类型的容器
+ * 注意!!!!!!!!!!!!!!实现此类必须是单例模式 因为只有单例才会对map进行缓存进去
+ * 如果不是单例请不要继承此类 谢谢合作 切此实现类的不建议出现泛型往上传递的现象 浪费
  */
-public abstract class AbStractSingleFactory<T> {
+public abstract class CacheTSingleContainer<T> {
 
-    protected final static Logger logger = LoggerFactory.getLogger(AbStractSingleFactory.class);
+    protected final static Logger logger = LoggerFactory.getLogger(CacheTSingleContainer.class);
 
     //存放所需要的准备数据
     protected ConcurrentHashMap<String, T> stringToT = new ConcurrentHashMap<>();
 
-    protected static AbStractSingleFactory singleFactory = null;
+    protected static CacheTSingleContainer singleFactory = null;
 
-    protected AbStractSingleFactory() {
+    protected CacheTSingleContainer() {
     }
 
     /**
@@ -60,6 +58,7 @@ public abstract class AbStractSingleFactory<T> {
             return false;
         }
         stringToT.put(type, t);
+        logger.info("K为" + type + "缓存成功");
         return true;
     }
 

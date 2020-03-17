@@ -1,5 +1,7 @@
 package com.guosiyang.beanTransform.generateNodes;
 
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.GetMethodNameAble;
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.SetMethodNameAble;
 import com.guosiyang.beanTransform.generateNodes.objectToFields.ChoiceFieldsAble;
 import lombok.Getter;
 import lombok.NonNull;
@@ -37,6 +39,14 @@ public class POJOTranContrain {
     @Getter
     @Setter
     private Class objectClass;
+
+    @Getter
+    @Setter
+    private SetMethodNameAble setMethodNameAble;
+
+    @Getter
+    @Setter
+    private GetMethodNameAble getMethodNameAble;
 
     @Override
     public String toString() {

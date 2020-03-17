@@ -1,16 +1,15 @@
 package com.guosiyang.beanTransform;
 
 import com.google.common.collect.Lists;
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.CommonGetMethodName;
+import com.guosiyang.beanTransform.generateNodes.FieldsToTransformNode.methodName.CommonSetMethodName;
 import com.guosiyang.beanTransform.generateNodes.POJOTranContrain;
-import com.guosiyang.beanTransform.generateNodes.objectToFields.ChoiceFieldSingleFactory;
-import com.guosiyang.beanTransform.generateNodes.transformNodes.RootTransformNode;
+import com.guosiyang.beanTransform.generateNodes.objectToFields.ChoiceFieldSingleContainer;
 import com.guosiyang.beanTransform.util.ExpectedException;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,12 +123,17 @@ public class POJOTransformUtil {
         sum.addAll(availOut);
         sum.stream().map(p -> {
             if (p.getChoiceFieldsAble() == null)
-                p.setChoiceFieldsAble(ChoiceFieldSingleFactory.getInstance().getTByType("NULL"));
+                p.setChoiceFieldsAble(ChoiceFieldSingleContainer.getInstance().getTByType("NULL"));
+            if (p.getGetMethodNameAble() == null)
+                p.setGetMethodNameAble(CommonGetMethodName.getInstance());
+            if (p.getSetMethodNameAble() == null)
+                p.setSetMethodNameAble(CommonSetMethodName.getInstance());
             return p;
         });
         logger.info("筛选之后传入对象数组为 : " + availIn.toString() + "筛选之后传出对象数组为 : " + availOut.toString());
         logger.info("校验成功 进入生成节点");
-        return null;
+        TransformOperator transformOperator =new TransformOperator();
+        return transformOperator.pojosTopojos(availIn,availOut);
     }
 
     /**

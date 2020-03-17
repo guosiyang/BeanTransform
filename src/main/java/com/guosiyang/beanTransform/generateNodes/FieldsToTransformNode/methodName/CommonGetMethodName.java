@@ -14,9 +14,21 @@ import java.util.Collection;
  * @Description : TODO
  * @Author : 郭思洋
  * @Date: 2020-03-16 01:34
- * @Think: 该方法为通用实现 实现方法 获取field的类型的简单名字 加上get
+ * @Think: 该方法为通用实现 实现方法 对于非集合类型获取field的类型的简单名字 加上get
+ * 集合类型 获取字段名称 首字母大写 加上get
  */
 public class CommonGetMethodName implements GetMethodNameAble {
+
+
+    private final static class Holder {
+        public final static CommonGetMethodName single = new CommonGetMethodName();
+    }
+
+    private CommonGetMethodName(){}
+
+    public static CommonGetMethodName getInstance(){
+        return Holder.single;
+    }
 
     @Override
     public String getMethodNameByClass(@NonNull Field field) {
@@ -25,4 +37,7 @@ public class CommonGetMethodName implements GetMethodNameAble {
         }
         return "get" + field.getType().getSimpleName();
     }
+
+
+
 }

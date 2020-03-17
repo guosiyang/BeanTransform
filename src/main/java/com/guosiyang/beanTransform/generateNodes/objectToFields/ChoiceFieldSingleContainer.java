@@ -1,6 +1,6 @@
 package com.guosiyang.beanTransform.generateNodes.objectToFields;
 
-import com.guosiyang.beanTransform.util.AbStractSingleFactory;
+import com.guosiyang.beanTransform.util.CacheTSingleContainer;
 
 /**
  * @ClassName : ChoiceFieldSingleFactory
@@ -9,16 +9,16 @@ import com.guosiyang.beanTransform.util.AbStractSingleFactory;
  * @Date: 2020-02-25 00:31
  * @Think: 针对ChoiceFieldAble接口设计的单例工厂
  */
-public class ChoiceFieldSingleFactory extends AbStractSingleFactory<ChoiceFieldsAble> {
+public class ChoiceFieldSingleContainer extends CacheTSingleContainer<ChoiceFieldsAble> {
 
-    private ChoiceFieldSingleFactory() {
+    private ChoiceFieldSingleContainer() {
     }
 
-    public static AbStractSingleFactory<ChoiceFieldsAble> getInstance() {
+    public static CacheTSingleContainer<ChoiceFieldsAble> getInstance() {
         if (singleFactory == null) {
-            synchronized (ChoiceFieldSingleFactory.class) {
-                singleFactory = new ChoiceFieldSingleFactory();
-                ((ChoiceFieldSingleFactory) singleFactory).init();
+            synchronized (ChoiceFieldSingleContainer.class) {
+                singleFactory = new ChoiceFieldSingleContainer();
+                ((ChoiceFieldSingleContainer) singleFactory).init();
             }
         }
         return singleFactory;

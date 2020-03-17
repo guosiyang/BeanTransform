@@ -16,6 +16,17 @@ import java.util.Collection;
  * 对于集合节点 使用add+集合中的泛型的Type
  */
 public class CommonSetMethodName implements SetMethodNameAble {
+
+    private final static class Holder {
+        public final static CommonSetMethodName single = new CommonSetMethodName();
+    }
+
+    private CommonSetMethodName(){}
+
+    public static CommonSetMethodName getInstance(){
+        return CommonSetMethodName.Holder.single;
+    }
+
     @Override
     public String setMethodNameByClass(@NonNull Field field) {
         if (Collection.class.isAssignableFrom(field.getType())){
@@ -33,6 +44,13 @@ public class CommonSetMethodName implements SetMethodNameAble {
         return field.getType();
     }
 
+    /**
+    * @Param
+    * @description TODO
+    * @author 郭思洋
+    * @date 2020/3/18 1:56
+    * @return 获得集合内的泛型类型
+    */
     private Class setListGenericType(Field field){
         Class type = null;
         field.setAccessible(true);
