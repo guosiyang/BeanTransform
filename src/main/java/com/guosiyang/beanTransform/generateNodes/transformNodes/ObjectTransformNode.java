@@ -5,6 +5,7 @@ import com.guosiyang.beanTransform.util.ParentToSonStruct;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -32,6 +33,13 @@ public class ObjectTransformNode extends ParentToSonStruct implements IsTransfor
     //指的是在POJO中在跟对象的位置 通过这个跟pojoWay可以确定唯一节点
     @Getter
     private String inPOJOOPosition;
+
+    //值得是当前位置的报文节点类型
+    // 比如 inPOJOPastion为 : Policy|A|B 则 nowInPOJOPosition为B
+    @Getter
+    @Setter
+    private String nowInPOJOPosition;
+
 
     //对于java对象 我们必然会有他的创建构造器
     @Getter

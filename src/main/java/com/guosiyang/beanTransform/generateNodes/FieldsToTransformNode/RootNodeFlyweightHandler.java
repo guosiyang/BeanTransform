@@ -27,7 +27,7 @@ public class RootNodeFlyweightHandler extends AbstractFieldsToNodeFlyweightHandl
         if (parrentTransfromNode == null){
             ObjectTransNodeBuilder o =new ObjectTransNodeBuilder(ObjectTransNodeBuilder.TransNodeType.ROOT);
             try {
-                o.setConstructor(thisClass.getConstructor(null));
+                o.setConstructor(thisClass.getConstructor(null)).setNowPostion(thisClass.getSimpleName());
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }

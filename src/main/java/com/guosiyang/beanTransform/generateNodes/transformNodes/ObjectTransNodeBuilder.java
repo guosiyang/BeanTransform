@@ -1,5 +1,6 @@
 package com.guosiyang.beanTransform.generateNodes.transformNodes;
 
+import com.sun.org.apache.regexp.internal.RE;
 import lombok.NonNull;
 
 import java.lang.reflect.Constructor;
@@ -89,8 +90,15 @@ public class ObjectTransNodeBuilder {
         return this;
     }
 
+    public ObjectTransNodeBuilder setNowPostion(String nowPostion){
+        transformNode.setNowInPOJOPosition(nowPostion);
+        return this;
+    }
+
     public ObjectTransformNode getResult(){
         return transformNode;
     }
+
+
 
 }

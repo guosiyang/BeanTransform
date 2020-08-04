@@ -15,79 +15,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * 注意!!!!!!!!!!!!!!实现此类必须是单例模式 因为只有单例才会对map进行缓存进去
  * 如果不是单例请不要继承此类 谢谢合作 切此实现类的不建议出现泛型往上传递的现象 浪费
  */
-public abstract class CacheTSingleContainer<T> {
-
-    protected final static Logger logger = LoggerFactory.getLogger(CacheTSingleContainer.class);
-
-    //存放所需要的准备数据
-    protected ConcurrentHashMap<String, T> stringToT = new ConcurrentHashMap<>();
-
-    protected static CacheTSingleContainer singleFactory = null;
+public abstract class CacheTSingleContainer<V> extends CacheVByKSingleContainer<String, V> {
 
     protected CacheTSingleContainer() {
     }
 
-    /**
-     * @return
-     * @Param
-     * @description 该类 我的主要用途为数据初始化 把所需要的数据绑定在单例创建对象里 并调用
-     * @author 郭思洋
-     * @date 2020/2/25 0:21
-     */
-    protected abstract boolean init();
-
-    /**
-     * @return
-     * @Param
-     * @description 不支持覆盖 为什么呢 因为我所理解 能使用这个类的
-     * 其实不用担心存储数量太大 或者需要更新 你啥策略里能存10个
-     * 往多了说 20个顶天了 没必要覆盖 同时对于lambda表达式生成的策略不允许添加
-     * @author 郭思洋
-     * @date 2020/2/25 0:19
-     */
-    public boolean insertT(String type, T t) {
-        if (type == null || "".equals(type) || t == null) {
-            logger.info("传入的type或t为空");
+    public boolean insertT(String key, V value) {
+        if (LambdaUtil.isLambdaClassBySimpleName(key)) {
             return false;
         }
-        if (stringToT.containsKey(type)) {
-            logger.info("传入的type : " + type + "已存在");
-            return false;
-        }
-        if (LambdaUtil.isLambdaClassBySimpleName(type)){
-            return false;
-        }
-        stringToT.put(type, t);
-        logger.info("K为" + type + "缓存成功");
-        return true;
-    }
-
-    /**
-     * @return
-     * @Param
-     * @description 获取对应的T的类型
-     * @author 郭思洋
-     * @date 2020/2/25 0:26
-     */
-    public T getTByType(String type) {
-        if (type == null || "".equals(type)) {
-            return null;
-        }
-        return stringToT.get(type);
-    }
-
-    /**
-     * @return
-     * @Param
-     * @description 看是否存在相关联的type 如果存在此type则不能使用
-     * @author 郭思洋
-     * @date 2020/2/25 0:30
-     */
-    public boolean isExistType(String type) {
-        if (type == null || "".equals(type)) {
-            logger.info("传入的type或t为空");
-            return false;
-        }
-        return stringToT.containsKey(type);
+        return super.insertT(key, value);
     }
 }

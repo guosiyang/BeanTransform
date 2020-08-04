@@ -28,7 +28,7 @@ public class FinalNodeFlyweightHandler extends AbstractFieldsToNodeFlyweightHand
         if (TypeJudgeUtil.isStringOrBasicType(nowField.getType())){
             ObjectTransNodeBuilder o = new ObjectTransNodeBuilder(ObjectTransNodeBuilder.TransNodeType.FINAL);
             commonDeal(o,nowField,parrentTransfromNode);
-            o.setPolicyWay(parrentTransfromNode.getPojoWay() + "|" + nowField.getType().getSimpleName()).
+            o.setPolicyWay(parrentTransfromNode.getPojoWay() + "|" + nowField.getName()).
                     setParentNode(parrentTransfromNode).
                     setSetMethod(getSetMethod(nowField, parrentTransfromNode)).
                     setGetMethod(getGetMethod(nowField, parrentTransfromNode));

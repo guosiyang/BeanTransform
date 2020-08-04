@@ -30,10 +30,10 @@ public abstract class AbstractFieldsToNodeFlyweightHandler {
     protected AbstractFieldsToNodeFlyweightHandler nextHandler;
 
     //生成的get方法的名称
-    private GetMethodNameAble getMethodNameAble = new CommonGetMethodName();
+    private GetMethodNameAble getMethodNameAble = CommonGetMethodName.getInstance();
 
     //生成的set方法名称
-    private SetMethodNameAble setMethodNameAble = new CommonSetMethodName();
+    private SetMethodNameAble setMethodNameAble = CommonSetMethodName.getInstance();
 
 
     public AbstractFieldsToNodeFlyweightHandler(GetMethodNameAble getMethodNameAble, SetMethodNameAble setMethodNameAble) {
@@ -67,7 +67,7 @@ public abstract class AbstractFieldsToNodeFlyweightHandler {
      */
     protected ObjectTransNodeBuilder commonDeal(ObjectTransNodeBuilder o, Field nowField, ObjectTransformNode parrentTransfromNode) {
         try {
-            o.setConstructor(nowField.getType().getConstructor(null)).setNowField(nowField);
+            o.setConstructor(nowField.getType().getConstructor(null)).setNowField(nowField).setNowPostion(nowField.getType().getSimpleName());
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

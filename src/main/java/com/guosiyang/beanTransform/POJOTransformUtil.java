@@ -102,6 +102,10 @@ public class POJOTransformUtil {
                 outList.size() == 0 || (outList.size() != 1 && inList.size() != 1)) {
             throw new ExpectedException("暂不支持多对多");
         }
+        /**
+         * 对于输入集合进行处理
+         * inList -> 删除掉 POJOTranContrain的转换对象= null的 -> 迭代循环进传入集合
+         */
         inList.stream().filter(in -> {
             if (in.getTransObject() == null)
                 return false;
@@ -109,6 +113,10 @@ public class POJOTransformUtil {
         }).forEach(in -> {
             availIn.add(in);
         });
+        /**
+         * 对于输出集合进行处理
+         * inList -> 删除掉 被转换对象 = null的/被转换对象的class = null -> 迭代循环进传入集合
+         */
         outList.stream().filter(out -> {
             if (out.getTransObject() == null || out.getObjectClass() == null)
                 return false;
@@ -121,6 +129,9 @@ public class POJOTransformUtil {
         }
         List<POJOTranContrain> sum = Lists.newArrayList(availIn);
         sum.addAll(availOut);
+        /**
+         * 进行对传入的或者传出POJOTranContrain -> 把没有设置为默认的set/get方法进行设置为默认值
+         */
         sum.stream().map(p -> {
             if (p.getChoiceFieldsAble() == null)
                 p.setChoiceFieldsAble(ChoiceFieldSingleContainer.getInstance().getTByType("NULL"));
@@ -133,7 +144,7 @@ public class POJOTransformUtil {
         logger.info("筛选之后传入对象数组为 : " + availIn.toString() + "筛选之后传出对象数组为 : " + availOut.toString());
         logger.info("校验成功 进入生成节点");
         TransformOperator transformOperator =new TransformOperator();
-        return transformOperator.pojosTopojos(availIn,availOut);
+        return transformOperator.pojosTopojos(availIn,availOut,null);
     }
 
     /**
