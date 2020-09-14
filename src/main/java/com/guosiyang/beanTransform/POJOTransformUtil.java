@@ -146,7 +146,8 @@ public class POJOTransformUtil {
         logger.info("筛选之后传入对象数组为 : " + availIn.toString() + "筛选之后传出对象数组为 : " + availOut.toString());
         logger.info("校验成功 进入生成节点");
         TransformOperator transformOperator =new TransformOperator();
-        return transformOperator.pojosTopojos(availIn,availOut);
+        //此处需要修改 别忘了
+        return transformOperator.pojosTopojos(availIn,availOut,new ArrayList<String>());
     }
 
     /**
