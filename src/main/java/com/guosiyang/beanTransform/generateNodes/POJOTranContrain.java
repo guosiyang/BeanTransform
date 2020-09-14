@@ -40,10 +40,16 @@ public class POJOTranContrain {
     @Setter
     private Class objectClass;
 
+    /**
+     * 怎么能确定一个字段对应的set方法 通过参数 / 方法名称拿到反射 就是此接口的参数
+     */
     @Getter
     @Setter
     private SetMethodNameAble setMethodNameAble;
 
+    /**
+     * 怎么能确定一个字段的get方法 仅仅需要知道名称就行
+     */
     @Getter
     @Setter
     private GetMethodNameAble getMethodNameAble;

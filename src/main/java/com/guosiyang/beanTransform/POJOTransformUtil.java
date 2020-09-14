@@ -91,6 +91,7 @@ public class POJOTransformUtil {
      * @Param
      * @description 多个报文对象生成  第一 这是初版 目前不支持多转多
      * 仅仅只支持 1转多 多转1 1转1
+     *
      * @author 郭思洋
      * @date 2020/3/14 23:43
      */
@@ -102,6 +103,9 @@ public class POJOTransformUtil {
                 outList.size() == 0 || (outList.size() != 1 && inList.size() != 1)) {
             throw new ExpectedException("暂不支持多对多");
         }
+        /**
+         * inList->筛选不为空->添加进availIn
+         */
         inList.stream().filter(in -> {
             if (in.getTransObject() == null)
                 return false;
@@ -109,6 +113,9 @@ public class POJOTransformUtil {
         }).forEach(in -> {
             availIn.add(in);
         });
+        /**
+         * outList->筛选不为空->添加进availOut
+         */
         outList.stream().filter(out -> {
             if (out.getTransObject() == null || out.getObjectClass() == null)
                 return false;
@@ -121,6 +128,11 @@ public class POJOTransformUtil {
         }
         List<POJOTranContrain> sum = Lists.newArrayList(availIn);
         sum.addAll(availOut);
+        /**
+         * POJOTranContrain -> 晒选出为null的节点策略 并置为null策略
+         *                  -> 筛选出GetMethodNameAble为null 并置为简单地首 字母大写 加上get的策略
+         *                  -> 筛选出SetMethodNameAble为null 并置为简单地首 非集合类型为 set + 首字母大写 , 集合类型为add+实体类名称 的默认策略
+         */
         sum.stream().map(p -> {
             if (p.getChoiceFieldsAble() == null)
                 p.setChoiceFieldsAble(ChoiceFieldSingleContainer.getInstance().getTByType("NULL"));

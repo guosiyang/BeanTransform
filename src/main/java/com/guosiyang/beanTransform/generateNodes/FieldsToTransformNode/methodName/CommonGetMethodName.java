@@ -24,11 +24,11 @@ public class CommonGetMethodName implements GetMethodNameAble {
         public final static CommonGetMethodName single = new CommonGetMethodName();
     }
 
-    private CommonGetMethodName(){}
-
     public static CommonGetMethodName getInstance(){
         return Holder.single;
     }
+
+    private CommonGetMethodName(){}
 
     @Override
     public String getMethodNameByClass(@NonNull Field field) {
