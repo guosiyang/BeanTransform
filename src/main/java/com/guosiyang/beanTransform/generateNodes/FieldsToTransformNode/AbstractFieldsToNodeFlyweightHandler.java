@@ -67,7 +67,7 @@ public abstract class AbstractFieldsToNodeFlyweightHandler {
      */
     protected ObjectTransNodeBuilder commonDeal(ObjectTransNodeBuilder o, Field nowField, ObjectTransformNode parrentTransfromNode) {
         try {
-            o.setConstructor(nowField.getType().getConstructor(null)).setNowField(nowField);
+            o.setConstructor(nowField.getType().getConstructor(null)).setNowField(nowField).setNowPostion(nowField.getType().getSimpleName());
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

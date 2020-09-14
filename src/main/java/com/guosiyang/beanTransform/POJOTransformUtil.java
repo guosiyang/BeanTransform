@@ -91,7 +91,6 @@ public class POJOTransformUtil {
      * @Param
      * @description 多个报文对象生成  第一 这是初版 目前不支持多转多
      * 仅仅只支持 1转多 多转1 1转1
-     *
      * @author 郭思洋
      * @date 2020/3/14 23:43
      */
@@ -104,7 +103,8 @@ public class POJOTransformUtil {
             throw new ExpectedException("暂不支持多对多");
         }
         /**
-         * inList->筛选不为空->添加进availIn
+         * 对于输入集合进行处理
+         * inList -> 删除掉 POJOTranContrain的转换对象= null的 -> 迭代循环进传入集合
          */
         inList.stream().filter(in -> {
             if (in.getTransObject() == null)
@@ -114,7 +114,8 @@ public class POJOTransformUtil {
             availIn.add(in);
         });
         /**
-         * outList->筛选不为空->添加进availOut
+         * 对于输出集合进行处理
+         * inList -> 删除掉 被转换对象 = null的/被转换对象的class = null -> 迭代循环进传入集合
          */
         outList.stream().filter(out -> {
             if (out.getTransObject() == null || out.getObjectClass() == null)

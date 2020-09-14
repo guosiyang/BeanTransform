@@ -21,12 +21,12 @@ public class ChoiceFieldSingleContainer extends CacheTSingleContainer<ChoiceFiel
                 ((ChoiceFieldSingleContainer) singleFactory).init();
             }
         }
-        return singleFactory;
+        return (CacheTSingleContainer<ChoiceFieldsAble>)singleFactory;
     }
 
     @Override
     protected boolean init() {
-        stringToT.put("NULL", new NullChoiceField());
+        KToT.put("NULL", new NullChoiceField());
         logger.info("添加ChoiceFieldAble的null策略成功");
         return true;
     }
